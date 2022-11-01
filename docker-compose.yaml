@@ -1,0 +1,28 @@
+version: '3.7'
+
+networks:
+  main:
+    name: rabbitmq-simple-exchange-amqp-main
+    external: true
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.9.24
+    networks:
+      main: null
+
+  simple-publisher:
+    build:
+      context: simple-publisher
+    depends_on:
+      - rabbitmq
+    networks:
+      main: null
+
+  simple-consumer:
+    build:
+      context: simple-consumer
+    depends_on:
+      - simple-publisher
+    networks:
+      main: null

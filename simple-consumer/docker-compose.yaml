@@ -1,0 +1,14 @@
+version: '3.7'
+
+networks:
+  main:
+    name: rabbitmq-simple-exchange-amqp-main
+    external: true
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./:/opt/project
+    networks:
+      - main
